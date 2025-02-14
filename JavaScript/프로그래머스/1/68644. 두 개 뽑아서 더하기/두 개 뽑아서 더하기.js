@@ -1,12 +1,11 @@
 function solution(numbers) {
-    var array = [];
     var answer = [];
-    for(let i =0; i<numbers.length; i++){
-        for(let j = i+1; j < numbers.length; j++){
-            array.push(numbers[i]+numbers[j]);
+    let sum = 0;
+    for(let i = 0; i<numbers.length; i++){
+        for(let j = i+1; j<numbers.length; j++){
+            sum = numbers[i] + numbers[j]
+            answer.push(sum)
         }
     }
-    answer = [...new Set(array)].sort((a,b)=>(a-b));
-     
-    return answer;
+    return [...new Set(answer)].sort((a,b)=>a-b);
 }
