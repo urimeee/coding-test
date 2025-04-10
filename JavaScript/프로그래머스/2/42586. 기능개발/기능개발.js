@@ -1,19 +1,22 @@
 function solution(progresses, speeds) {
-    var answer = [0];
-    let leftProgress = [];
+    var answer = [];
+    let count = 0;
+    const progressLength = progresses.length;
+    
+    const remaining = progresses.map((progress, i) => Math.ceil((100 - progress) / speeds[i]));
+    let deployDate = remaining[0];
 
-    leftProgress = progresses.map((progress) =>  100 - progress);
-    let leftDay = leftProgress.map((leftProgress, index) => Math.ceil(leftProgress / speeds[index]));
 
-    let maxDay = leftDay[0];
-    for(let i = 0, j = 0; i < leftDay.length; i++){
-       if (leftDay[i] <= maxDay){
-           answer[j] += 1;
-       }
-        else{
-            maxDay = leftDay[i];
-            answer[++j] = 1;
+    for (let i = 0; i < remaining.length; i++) {
+        if (remaining[i] <= deployDate) {
+            count ++;
+        }
+        else {
+            answer.push(count);
+            deployDate = remaining[i];
+            count = 1;
         }
     }
+    answer.push(count);
     return answer;
 }
