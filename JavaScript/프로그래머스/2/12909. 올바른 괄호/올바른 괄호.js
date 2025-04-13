@@ -1,19 +1,18 @@
 function solution(s){
-    let stack = [];
-    
-    for(const char of s){
-        if(char === "(") stack.push(char);
-        else {
-            if(stack.length ===0){
+    var answer = true;
+    const stack = [];
+
+    for (let i of s) {
+        if (i === "(") {
+            stack.push(i);
+        } else {
+            if (stack.length === 0) {
                 return false;
             }
-            stack.pop()
-        };
+            stack.pop();
+        }
     }
     
-    if(stack.length > 0){
-        return false;
-    }
-    else return true;
-
+    if (stack.length === 0) return true;
+    else return false;
 }
