@@ -1,0 +1,14 @@
+-- 코드를 작성해주세요
+WITH RECURSIVE Generation_CTE AS (
+  SELECT ID, PARENT_ID, 1 AS Generation
+  FROM ECOLI_DATA
+  WHERE PARENT_ID IS NULL
+  UNION ALL
+  SELECT e.ID, e.PARENT_ID, g.Generation + 1
+  FROM ECOLI_DATA e
+  INNER JOIN Generation_CTE g ON e.PARENT_ID = g.ID
+)
+SELECT ID
+FROM Generation_CTE
+WHERE Generation = 3
+ORDER BY ID ASC;
